@@ -7,14 +7,14 @@ from functools import reduce
 
 
 def read_db(path):
-    hashes = {}  # 分区
+    hashes = {}    # partitions
     with open(path, 'r') as fin:
         line0 = fin.readline().strip()
         global attrset
         attrset = line0.split(',')
         print("attribte set:", attrset)
         for t, line in enumerate(fin):  # t为行序数, line为行数据
-            line = line.strip()  # 去除首位空格
+            line = line.strip()    # 去除首尾空格
             if line == '':
                 break
             for i, s in enumerate(line.split(',')):  # i为属性序数, s为属性值
@@ -107,7 +107,6 @@ class PartitionsManager(object):
         Initializes the cache
         '''
         self.T = T  # T为计算好的剥离分区
-        attr = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
         # self.cache = {0: None, 1: {(i,): j for i, j in zip(attr, T)}}  # 属性集：剥离分区
         self.cache = {0: None, 1: {(i,): j for i, j in enumerate(T)}}  # 属性集：剥离分区
         self.current_level = 1
