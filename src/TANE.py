@@ -23,7 +23,7 @@ def read_db(path):
         # print(hashes)
         # 计算剥离分区
         strippedPartition = [PPattern.fix_desc(hashes[k].values()) for k in sorted(hashes.keys())]
-        print("strippedPartition", strippedPartition)
+        # print("strippedPartition", strippedPartition)
         return strippedPartition
 
 
@@ -271,6 +271,8 @@ class TANE(object):
                     # WE ADD THIS LINE, SEEMS A BETTER ALTERNATIVE TO CALCULATE THE PARTITION HERE WHEN
                     # WE HAVE REFERENCES TO BOTH PARTITIONS USED TO CALCULATE IT
                     self.pmgr.register_partition(X, i, j)
+                    # print("X", X)
+                # print("next_L", next_L)
         return next_L
 
     def memory_wipe(self):
@@ -287,6 +289,7 @@ class TANE(object):
         L = [None, L1]
         l = 1
         while bool(L[l]):
+            # print(L)
             self.compute_dependencies(L[l])
             self.prune(L[l])
             L.append(self.generate_next_level(L[l]))
